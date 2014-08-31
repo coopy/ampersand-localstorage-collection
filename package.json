@@ -4,7 +4,7 @@
   "description": "A drop-in localstorage-backed Ampersand Collection.",
   "main": "ampersand-localstorage-collection.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha test/index.js"
+    "test": "./node_modules/.bin/mocha test/test.js"
   },
   "keywords": [
     "ampersand",
@@ -14,11 +14,12 @@
   "author": "Per Nilsson <per@sproutlab.com>",
   "license": "MIT",
   "devDependencies": {
-    "mocha": "^1.21.4",
+    "ampersand-model": "^4.0.1",
     "chai": "^1.9.1",
-    "node-localstorage": "^0.3.4",
     "describe": "^1.2.0",
-    "ampersand-model": "^4.0.1"
+    "mocha": "^1.21.4",
+    "node-localstorage": "^0.3.4",
+    "sinon": "^1.10.3"
   },
   "dependencies": {
     "ampersand-collection": "^1.3.13",
