@@ -8,6 +8,12 @@ var makeId = function() {
     return localStorage.length;
 };
 
+var conditionallyAddItem = function (models, collection, key) {
+    if (key.indexOf(collection.namespace + '_') === 0) {
+        models.push(localStorage.getItem(key));
+    }
+};
+
 module.exports = {
     // Collections should define a namespace for localStorage.
     namespace: null,
@@ -30,11 +36,17 @@ module.exports = {
         var models = [];
         var result;
         var data;
-        localStorage.keys.forEach(function (key) {
-            if (key.indexOf(collection.namespace + '_') === 0) {
-                models.push(localStorage.getItem(key));
-            }
-        });
+        // Iteration over keys looks different depending on your localStorage implementation.
+        if (localStorage.keys) {
+            localStorage.keys.forEach(function (key) {
+                conditionallyAddItem(models, collection, key);
+            });
+        } else {
+            for (var key in localStorage) {
+                conditionallyAddItem(models, collection, key);
+            };
+        }
+
         result = '[' + models.join(',') + ']';
         data = JSON.parse(result);
         options.success(data);
